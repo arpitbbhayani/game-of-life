@@ -20,6 +20,7 @@ function Game(grid) {
   this.draw = function() {
     for (var i = 0; i < this.rows ; i++) {
       for(var j = 0 ; j < this.cols ; j++) {
+        stroke(255)
         fill(this.grid[i][j] ? 0 : 255)
         rect(j * this.wy, i * this.wx, this.wx, this.wy);
       }
