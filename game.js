@@ -20,12 +20,8 @@ function Game(grid) {
   this.draw = function() {
     for (var i = 0; i < this.rows ; i++) {
       for(var j = 0 ; j < this.cols ; j++) {
-        if (i == 0 || j == 0 || i === this.rows - 1 || j === this.cols - 1) {
-          fill(255)
-        } else {
-          fill(this.grid[i][j] ? 255 : 0)
-        }
-        rect(i * this.wx, j * this.wy, this.wx, this.wy);
+        fill(this.grid[i][j] ? 0 : 255)
+        rect(j * this.wy, i * this.wx, this.wx, this.wy);
       }
     }
   }

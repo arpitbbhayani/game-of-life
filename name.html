@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset=utf-8>
+    <meta name=viewport content=width=device-width,initial-scale=1>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5"></script>
+    <script src=https://cdn.JsDelivr.net/npm/p5/lib/addons/p5.dom.min.js></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/figlet@1.2.4/lib/figlet.min.js"></script>
+    <script src="/base.js"></script>
+    <script src="/game.js"></script>
+    <script src="/name.js"></script>
+  </head>
+  <script>
+    var text = ``;
+    function loadText() {
+      text = document.getElementById('textInput').value;
+      setupGameOnText()
+    }
+  </script>
+  <div>
+    <p>
+      Generate <a target="_blank" href="http://patorjk.com/software/taag/#p=display&f=Banner3&t=ARPIT">ASCII art</a> and paste in the text box below.
+    </p>
+    <textarea id="textInput" rows="10" style="width: 600px;"></textarea>
+    <button onclick="loadText()">Load</button>
+    <div style="margin-top: 20px;">
+      <div id="sketch" />
+    </div>
+  </body>
+</html>
