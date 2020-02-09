@@ -1,3 +1,8 @@
+figlet.defaults({
+  fontPath: 'https://raw.githubusercontent.com/patorjk/figlet.js/master/fonts'
+});
+figlet.preloadFonts(['Banner3'])
+
 var text = `
  ######      ###    ##     ## ########     #######  ########    ##       #### ######## ########
 ##    ##    ## ##   ###   ### ##          ##     ## ##          ##        ##  ##       ##

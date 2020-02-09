@@ -3,6 +3,10 @@
     <meta charset=utf-8>
     <meta name=viewport content=width=device-width,initial-scale=1>
     <link rel="stylesheet" href="/style.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5"></script>
     <script src=https://cdn.JsDelivr.net/npm/p5/lib/addons/p5.dom.min.js></script>
@@ -15,15 +19,21 @@
   <script>
     var text = ``;
     function loadText() {
-      text = document.getElementById('textInput').value;
-      setupGameOnText()
+      var v = document.getElementById('textInput').value
+      if (!v) {
+        alert('no input');
+      }
+      figlet(v, 'Banner3', function(err, data) {
+        if (err) {
+          alert(err)
+        }
+        text = "\n" + data + "\n";
+        setupGameOnText();
+      })
     }
   </script>
   <div>
-    <p>
-      Generate <a target="_blank" href="http://patorjk.com/software/taag/#p=display&f=Banner3&t=ARPIT">ASCII art</a> and paste in the text box below.
-    </p>
-    <textarea id="textInput" rows="10" style="width: 600px;"></textarea>
+    <input id="textInput" style="width: 200px;" value="game of life"></input>
     <button onclick="loadText()">Load</button>
     <div style="margin-top: 20px;">
       <div id="sketch" />
