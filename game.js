@@ -1,7 +1,27 @@
+function getNeighbourCount(g, i, j) {
+  var neighboursCount = 0;
+
+  try { neighboursCount += g[i-1][j] ? 1 : 0; } catch (e) {}
+  try { neighboursCount += g[i][j-1] ? 1 : 0; } catch (e) {}
+  try { neighboursCount += g[i+1][j] ? 1 : 0; } catch (e) {}
+  try { neighboursCount += g[i][j+1] ? 1 : 0; } catch (e) {}
+  try { neighboursCount += g[i-1][j-1] ? 1 : 0; } catch (e) {}
+  try { neighboursCount += g[i+1][j+1] ? 1 : 0; } catch (e) {}
+  try { neighboursCount += g[i-1][j+1] ? 1 : 0; } catch (e) {}
+  try { neighboursCount += g[i+1][j-1] ? 1 : 0; } catch (e) {}
+  return neighboursCount
+}
+
 function newGrid(r, c) {
   var g = new Array(r)
   for (var i = 0; i < r; i++) {
     g[i] = new Array(c)
+  }
+
+  for (var i = 0; i < r; i++) {
+    for (var j = 0; j < c; j++) {
+      g[i][j] = 0;
+    }
   }
   return g
 }
@@ -20,34 +40,28 @@ function Game(grid) {
   this.draw = function() {
     for (var i = 0; i < this.rows ; i++) {
       for(var j = 0 ; j < this.cols ; j++) {
-        stroke(255)
+        // stroke(255)
         fill(this.grid[i][j] ? 0 : 255)
-        rect(j * this.wy, i * this.wx, this.wx, this.wy);
+        rect(j * this.wy, i * this.wx, this.wy, this.wx);
       }
     }
   }
 
   this.move = function() {
-    for (var i = 1; i < this.rows - 1 ; i++) {
-      for (var j = 1; j < this.cols - 1; j++) {
-        let neighboursCount = 0;
-        neighboursCount += this.grid[i-1][j];
-        neighboursCount += this.grid[i+1][j];
-        neighboursCount += this.grid[i][j-1];
-        neighboursCount += this.grid[i][j+1];
-        neighboursCount += this.grid[i-1][j-1];
-        neighboursCount += this.grid[i-1][j+1];
-        neighboursCount += this.grid[i+1][j-1];
-        neighboursCount += this.grid[i+1][j+1];
-        if (this.grid[i][j] === 1) {
-          this.nextGrid[i][j] = neighboursCount < 2 || neighboursCount > 3 ? 0 : 1;
+    for (var i = 0; i < this.rows; i++) {
+      for (var j = 0; j < this.cols; j++) {
+        let neighboursCount = getNeighbourCount(this.grid, i, j);
+        if (this.grid[i][j] && (neighboursCount < 2 || neighboursCount > 3)) {
+          this.nextGrid[i][j] = 0;
+        } else if (!this.grid[i][j] && neighboursCount === 3) {
+          this.nextGrid[i][j] = 1;
         } else {
-          this.nextGrid[i][j] = neighboursCount === 3 ? 1 : 0;
+          this.nextGrid[i][j] = this.grid[i][j];
         }
       }
     }
     var t = this.grid;
-    this.nextGrid = this.nextGrid;
+    this.grid = this.nextGrid;
     this.nextGrid = t;
   }
 
