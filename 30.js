@@ -1,3 +1,5 @@
+var bitBuffer = [1];
+
 function get_state(a, b, c) {
   a = a || 0
   b = b || 0
@@ -29,6 +31,16 @@ function Game(grid) {
 
     for (var i = 0; i < this.cols; i++) {
       this.grid[this.current][i] = get_state(this.grid[parent][i >= 1 ? i-1 : this.cols - 1], this.grid[parent][i], this.grid[parent][i+1  % this.cols])
+    }
+
+    bitBuffer.push(this.grid[this.current][45])
+    if (bitBuffer.length === 8) {
+      var v = 0;
+      for (var j = 0; j < 8; j++) {
+        v += bitBuffer[j] * (1 << 7 - j);
+      }
+      console.log(bitBuffer, v)
+      bitBuffer = []
     }
 
     this.current ++
