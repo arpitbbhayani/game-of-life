@@ -13,13 +13,13 @@ function getNeighbourCount(g, i, j) {
 }
 
 function newGrid(r, c) {
-  var g = new Array(r)
-  for (var i = 0; i < r; i++) {
-    g[i] = new Array(c)
+  var g = new Array(c)
+  for (var i = 0; i < c; i++) {
+    g[i] = new Array(r)
   }
 
-  for (var i = 0; i < r; i++) {
-    for (var j = 0; j < c; j++) {
+  for (var i = 0; i < c; i++) {
+    for (var j = 0; j < r; j++) {
       g[i][j] = 0;
     }
   }
@@ -38,11 +38,11 @@ function Game(grid) {
   this.nextGrid = newGrid(this.rows, this.cols);
 
   this.draw = function() {
-    for (var i = 0; i < this.rows ; i++) {
-      for(var j = 0 ; j < this.cols ; j++) {
+    for (var i = 0; i < this.cols ; i++) {
+      for(var j = 0 ; j < this.rows ; j++) {
         // stroke(255)
         fill(this.grid[i][j] ? 0 : 255)
-        rect(j * this.wy, i * this.wx, this.wy, this.wx);
+        rect(i * this.wx, j * this.wy, this.wx, this.wy);
       }
     }
   }

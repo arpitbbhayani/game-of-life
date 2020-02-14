@@ -63,6 +63,6 @@ for (var i = 0; i < 161; i++) {
   grid123[i] = new Array(161)
 }
 
-grid123[0][45] = 1;
+grid123[0][80] = 1;
 
 game = new Game(grid123);
